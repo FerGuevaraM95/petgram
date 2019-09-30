@@ -1,19 +1,29 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Category } from '../Category'
+import { Loader } from '../Loader'
 
 import { List, Item } from './styles'
 
-export const  ListOfCategories = () => {
+function useCategoriesData() {
   const [categories, setCategories] = useState([])
-  const [showFixed, setShowFixed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(function() {
+  useEffect(function () {
+    setLoading(true)
     fetch('https://petgram-server-gm.luisfernandoguevara95.now.sh/categories')
       .then(res => res.json())
       .then(response => {
         setCategories(response)
+        setLoading(false)
       })
   }, [])
+
+  return { categories, loading }
+}
+
+export const  ListOfCategories = () => {
+  const { categories, loading }  = useCategoriesData()
+  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(function() {
     const onScroll = e => {
@@ -28,11 +38,16 @@ export const  ListOfCategories = () => {
   }, [showFixed])
 
   const renderList = (fixed) => (
-    <List className={ fixed ? 'fixed' : '' }>
-      {categories.map(category =>
+    <List fixed={fixed}>
+      {
+        loading
+          ? <Item key={'loading'} ><Loader />
+          </Item>
+          : categories.map(category =>
         <Item key={category.id}>
           <Category {...category} />
-        </Item>)}
+        </Item>)
+      }
     </List>
   )
 
