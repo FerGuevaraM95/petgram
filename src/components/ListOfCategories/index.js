@@ -4,7 +4,7 @@ import { Loader } from '../Loader'
 
 import { List, Item } from './styles'
 
-function useCategoriesData() {
+function useCategoriesData () {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -21,14 +21,14 @@ function useCategoriesData() {
   return { categories, loading }
 }
 
-export const  ListOfCategories = () => {
-  const { categories, loading }  = useCategoriesData()
+export const ListOfCategories = () => {
+  const { categories, loading } = useCategoriesData()
   const [showFixed, setShowFixed] = useState(false)
 
-  useEffect(function() {
+  useEffect(function () {
     const onScroll = e => {
-      const newShowFixed = window.scrollY > 200 
-        showFixed !== newShowFixed && 
+      const newShowFixed = window.scrollY > 200
+      showFixed !== newShowFixed &&
         setShowFixed(newShowFixed)
     }
 
@@ -41,21 +41,21 @@ export const  ListOfCategories = () => {
     <List fixed={fixed}>
       {
         loading
-          ? <Item key={'loading'} ><Loader />
-          </Item>
+          ? <Item key='loading'><Loader />
+            </Item>
           : categories.map(category =>
-        <Item key={category.id}>
-          <Category {...category} />
-        </Item>)
+            <Item key={category.id}>
+              <Category {...category} />
+            </Item>)
       }
     </List>
   )
 
   return (
-    <Fragment>
-      { renderList() }
-      { showFixed && renderList(true) }
-    </Fragment>
+    <>
+      {renderList()}
+      {showFixed && renderList(true)}
+    </>
 
   )
 }
