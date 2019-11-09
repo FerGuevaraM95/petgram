@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Layout } from '../components/Layout'
+
 export const NotFound = () => (
-  <h1>Esta página no esixte :(</h1>
+  <Layout title='Esta página no existe :(' />
 )
