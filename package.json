@@ -6,6 +6,7 @@
   "scripts": {
     "now-build": "npm run build",
     "build": "webpack",
+    "serve:dev": "webpack --mode 'development' && npx serve dist -s",
     "start": "webpack-dev-server --history-api-fallback",
     "lint": "standard"
   },
