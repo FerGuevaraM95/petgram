@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://petgram.luisfernandoguevara95.now.sh/",
+  "chromeWebSecurity": false,
+  "viewportWidth": 500,
+  "viewportHeiht": 800
+}
